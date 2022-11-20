@@ -4,7 +4,20 @@ const {sendAnswer} = require('../utils')
 const {search} = require('../searcher')
 
 const aggregateBy = ['subject', 'source', 'geo', 'person', 'event', 'org', 'firm', 'em', 'url']
-module.exports = async (req, res, next) =>{
+
+/**
+ * @param {Object} req Запит до серверу
+ * @param {String} req.content.queries Запит
+ * @param {String} req.content.aggregateBy Поле по якому проводити агрегацію
+ * @param {String} req.content.order Сортування результатів (за замовченням asc)
+ * @param {String} req.content.limit Максимальна кількість результатів у відповіді
+ * @param {String} req.content.startAt Дата з якої починати пошук
+ * @param {String} req.content.stopAt Дата до якої шукати результати
+ * @param {Object} res Відповідь від серверу
+ * @return {Promise}
+ */
+
+module.exports = async (req, res) =>{
     try{
         const {...content} = req.body
             if(!content.queries){

@@ -2,6 +2,18 @@ const ReadStream = require('fs-readstream-seek')
 const Manticoresearch = require('manticoresearch')
 
 // search in © Manticora
+/**
+ * @param {String} field Поле яке потрібно для виведення результатів
+ * @param {String} index Індекс в якому проводити пошук
+ * @param {String} query Текст для повнотекстового пошуку
+ * @param {String} dop_info Додаткові дані для пошукової строки
+ * @param {String} columns Поля в БД, які потрбні для видачі результатів (за замовченням всі *)
+ * @param {String} isLimit Виставлений ліміт (за замовченням false)
+ * @param {String} offset Зміщення від початкових даних видачі
+ * @param {String} limit Кількість результатів для видачі
+ * @param {Object} options Додаткові налаштування пошуку
+ * @return {Promise}
+ */
 exports.search = async (field, index, query, dop_info, columns = '*',  isLimit = false, offset = 0, limit = 10, options = []) => {
     const client = new Manticoresearch.ApiClient()
     client.basePath = process.env.MANTICORE_URL
@@ -27,12 +39,15 @@ exports.search = async (field, index, query, dop_info, columns = '*',  isLimit =
             queryString += ` ${item}`
         })
     }
-    //console.log(queryString)
     const res = await searchApi.sql(queryString)
     const { ...content } = res
     return {content, field}
 }
 // for find index to document from © Manticora
+/**
+ * @param {String} id  Ідентифікатор для пошуку індексу документа
+ * @return {Promise}
+ */
 exports.findIndex = (id) => {
     if(!id || !Number.isInteger(id) || id < 0)
     {
@@ -53,6 +68,11 @@ exports.findIndex = (id) => {
     });
 }
 // for find data using document id 
+/**
+ * @param {String} start Ідентифікатор початку збереженого документу
+ * @param {String} end  Ідентифікатор кінця збереженого документу
+ * @return {Promise}
+ */
 exports.getData = (start, end) => {
     if(!start || !Number.isInteger(start) || start < 0)
     {

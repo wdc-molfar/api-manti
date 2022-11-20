@@ -1,11 +1,10 @@
 const express = require('express')
-let path = require('path')
-let logger = require('morgan')
+const logger = require('morgan')
 const swaggerUi = require('swagger-ui-express') // to bind swagger with express 
 const swaggerJSDoc = require('swagger-jsdoc') // for API documentation
+const swStats = require('swagger-stats');
 const colors = require('colors')
-var timeout = require('connect-timeout')
-//const errorHandler = require('./middleware/error')
+const timeout = require('connect-timeout')
 
 const options = {
     definition:{
@@ -16,7 +15,7 @@ const options = {
         }
     },
     // path to the API DOCS
-    apis:['./routes/index.js']
+    apis:['./src/routes/index.js']
 }
 
 
@@ -26,7 +25,7 @@ let dotEnv = require('dotenv')
 
 dotEnv.config({path: './config/config.env'})
 
-const indexRouter = require('./routes/index')
+const indexRouter = require('./src/routes/index.js')
 
 const app = express()
 app.use(timeout('6000s'))
@@ -37,14 +36,20 @@ app.use((req, res, next) => {
     res.set('Cache-Control', process.env.CACHE_TYPE)
     next()
 })
-//app.use(errorHandler)
+app.get("/", (req,res) => {
+    res.writeHead(200, { 'Content-Type':'text/html'});
+	res.end(JSON.stringify({service: "MOLFAR-API-MANTI"}))
+})
+app.use(swStats.getMiddleware({swaggerSpec:swaggerSpec, uriPath:"/metrics", name:"@molfar/ms-registry"}))
 app.use('/api', indexRouter)
 app.use('/api-documentation', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
 
-let PORT = process.env.PORT || 3443
+const PORT = process.env.PORT || 3443
     app.listen(
         PORT,
         console.log(
             `Server running in ${process.env.NODE_ENV} node on port ${PORT}`.yellow.bold
         )
     )
+
+module.exports = app;    

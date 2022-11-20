@@ -4,7 +4,16 @@
   "description": "API for manticore searcher",
   "main": "app.js",
   "scripts": {
-    "start": "set NODE_ENV=dev && node app.js"
+    "start": "set NODE_ENV=dev && node app.js",
+    "test": "jest --no-cache --runInBand --forceExit",
+    "dev": "nodemon server.js --exec babel-node --presets babel-preset-env",
+    "lint": "eslint src/js",
+    "docs:oas": "widdershins -e .widdershins.yml  oas.yaml -o docs/oas/README.md",
+    "docs:api": "jsdoc2md  --template docs/.config/README.hbs --files src/**/*.js  > docs/api/README.md",
+    "docs:build": "npm run test && npm run docs:api && npm run docs:oas",
+    "docs:dev": " npm run docs:build && npm run remove-prism && npx vuepress dev docs",
+    "docs:prepublish": "npm run docs:build && npm run remove-prism && npx vuepress build docs",
+    "docs:gh-pages": "./gh-pages.sh"
   },
   "keywords": [
     "REST",
@@ -25,7 +34,44 @@
     "moment": "^2.29.1",
     "morgan": "^1.10.0",
     "swagger-jsdoc": "^6.1.0",
+    "swagger-stats": "^0.99.2",
     "swagger-ui-express": "^4.1.6",
     "yamljs": "^0.3.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.2.2",
+    "babel-preset-env": "^1.7.0",
+    "elegant-spinner": "^2.0.0",
+    "jest": "^27.4.3",
+    "jest-html-reporters": "^2.1.6",
+    "jest-openapi": "^0.14.1",
+    "jest-stare": "^2.3.0",
+    "log-update": "^4.0.0",
+    "split-file": "^2.2.1",
+    "supertest": "^6.1.6",
+    "widdershins": "^4.0.1"
+  },
+  "jest": {
+    "testMatch": [
+      "**/?(*.)+(test).js"
+    ],
+    "collectCoverage": true,
+    "coverageReporters": [
+      "lcov"
+    ],
+    "coverageDirectory": "./docs/.vuepress/public/coverage",
+    "reporters": [
+      "default",
+      [
+        "./node_modules/jest-html-reporters",
+        {
+          "publicPath": "./docs/.vuepress/public/testReport",
+          "filename": "test-report.html",
+          "pageTitle": "api-manti"
+        }
+      ]
+    ]
   }
 }

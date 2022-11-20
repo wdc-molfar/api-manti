@@ -1,0 +1,176 @@
+openapi: "3.0.2"
+
+
+info: 
+  
+  title: "API-MANTI. Сервіс пошуку з ManticoreSearch"
+  
+  description: "Надає можливості пошуку збережених документів в ManticoreSearch"
+  
+  version: "1.0.1"
+  
+  contact:
+    name: "jace-ita"
+    url: "http://localhost:3443/"
+    email: "boldak.andrey@gmail.com"
+  
+  license: 
+    name: "MIT License"
+    url: "http://localhost:8080/license.html"
+
+    
+
+servers:
+  
+  - url: "http://localhost:3443"
+    description: "Локальне розроблення"
+
+paths:
+  /:
+    get: 
+      
+      summary: "Отримати загальний опис сервісу"
+      description: "Повертає сторінку загального опису"
+      tags: 
+        - "Загальна інформація"
+      
+      responses:
+        200: 
+          description: "Успішна відповідь"
+          content:
+            text/html:
+              schema:
+                type: string
+              example: "Not found" 
+
+  /api/timeline:
+    post:
+      summary: query for get timeline
+      description: query for get timeline from Manticore
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                 queries:
+                   description: queries of request
+                   type: array
+                   items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          example: all
+                        query:
+                          type: string
+                          example: Trump
+                 startAt: 
+                   type: string
+                   format: date-time
+                 stopAt:
+                   type: string
+                   format: date-time
+                 points: 
+                   type: integer
+                   example: 50
+      responses:
+        200:
+          description: success
+        500:
+          description: error in server   
+
+  /api/aggregation:
+    post:
+      summary: query for get aggregation
+      description: query for get aggregation from Manticore
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                 queries:
+                   description: queries of request
+                   type: array
+                   items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          example: all
+                        query:
+                          type: string
+                          example: Trump
+                 aggregateBy: 
+                   type: string
+                   example: source
+                 startAt: 
+                   type: string
+                   format: date-time
+                 stopAt:
+                   type: string
+                   format: date-time
+                 order: 
+                   type: string
+                   example: asc 
+                 limit: 
+                   type: integer
+                   example: 50
+      responses:
+        200:
+          description: success
+        500:
+          description: error in server        
+
+  /api/content:
+    post:
+      summary: query for get content
+      description: query for get content from Manticore
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                 queries:
+                   description: queries of request
+                   type: array
+                   items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          example: all
+                        query:
+                          type: string
+                          example: Trump
+                 return:
+                   type: array
+                   items: 
+                      type: string
+                      example: subject
+                 startAt: 
+                   type: string
+                   format: date-time
+                 stopAt:
+                   type: string
+                   format: date-time
+                 startIndex: 
+                   type: integer
+                   example: 0 
+                 limit: 
+                   type: integer
+                   example: 50
+      responses:
+        200:
+          description: success
+        500:
+          description: error in server
+
+  /api/dict/person:
+    get:
+      summary: query for create dictionary
+      description: query for get content from Manticore
+      responses:
+        200:
+          description: success
+        500:
+          description: error in server        

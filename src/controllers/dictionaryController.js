@@ -4,7 +4,20 @@ const {sendAnswer} = require('../utils')
 const Manticoresearch = require('manticoresearch')
 
 const aggregateBy = ['em', 'person', 'datatime', 'source']
-module.exports = async (req, res, next) =>{
+
+/**
+ * @param {Object} req Запит до серверу
+ * @param {String} req.query Запит
+ * @param {String} req.params ["type"] Поле по яку потрібно агрегувати інформацію
+ * @param {String} req.params ["item"] Персона, по якій проводити пошук
+ * @param {String} req.query.limit Максимальна кількість результатів у відповіді
+ * @param {String} req.query.startAt Дата з якої починати пошук
+ * @param {String} req.query.stopAt Дата до якої шукати результати
+ * @param {Object} res Відповідь від серверу
+ * @return {Promise}
+ */
+
+module.exports = async (req, res) =>{
     try{
         let type = req.params["type"];
         let item = req.params["item"];

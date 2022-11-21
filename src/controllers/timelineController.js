@@ -47,7 +47,7 @@ module.exports = async (req, res) =>{
                 var diffDateTime =  Math.floor(stopAt - startAt); 
                 var step = Math.floor(diffDateTime / content.points)
                 if(step < 1){
-                    sendAnswer(req, res, "error", [{message: `hot have enought "points" ${content.pointscontent.points}`}])
+                    sendAnswer(req, res, "error", [{message: `hot have enought "points" ${content.points}`}])
                     return
                 }
                 if(content.queries.length == 0){

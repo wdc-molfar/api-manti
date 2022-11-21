@@ -2,12 +2,12 @@
   "name": "api-manti",
   "version": "1.0.0",
   "description": "API for manticore searcher",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
-    "start": "set NODE_ENV=dev && node app.js",
+    "start": "set NODE_ENV=dev && node server.js",
     "test": "jest --no-cache --runInBand --forceExit",
     "dev": "nodemon server.js --exec babel-node --presets babel-preset-env",
-    "lint": "eslint src/js",
+    "remove-prism": "sed -i.bak -e \":a\" -e 'N' -e '$!ba' -e \"s/<style src=\\\"prismjs.*css\\\"><\\/style>/ /\" node_modules/@vuepress/theme-default/layouts/Layout.vue",
     "docs:oas": "widdershins -e .widdershins.yml  oas.yaml -o docs/oas/README.md",
     "docs:api": "jsdoc2md  --template docs/.config/README.hbs --files src/**/*.js  > docs/api/README.md",
     "docs:build": "npm run test && npm run docs:api && npm run docs:oas",
@@ -44,6 +44,7 @@
     "babel-loader": "^8.2.2",
     "babel-preset-env": "^1.7.0",
     "elegant-spinner": "^2.0.0",
+    "prism-themes": "^1.9.0",
     "jest": "^27.4.3",
     "jest-html-reporters": "^2.1.6",
     "jest-openapi": "^0.14.1",
@@ -51,7 +52,9 @@
     "log-update": "^4.0.0",
     "split-file": "^2.2.1",
     "supertest": "^6.1.6",
-    "widdershins": "^4.0.1"
+    "widdershins": "^4.0.1",
+    "vuepress": "^1.8.2",
+    "vuepress-theme-cool": "^1.3.1"
   },
   "jest": {
     "testMatch": [

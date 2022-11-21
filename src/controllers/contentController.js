@@ -51,12 +51,13 @@ module.exports = async (req, res) =>{
             let startIndex = 0
             if(!content.startIndex){
                 startIndex = 0
-            }else if(content.startIndex >= 0){
-                startIndex = content.startIndex
             }else if(content.startIndex < 0){
                 sendAnswer(req, res, "error", [{message: '"startIndex" incorrect'}])
                 return;
+            }else{
+                startIndex = content.startIndex
             }
+
             // startTimeAt
             if(!content.startAt){
                 content.startAt = moment(process.env.MIN_DATETIME, "YYYYMMDD").toDate()

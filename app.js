@@ -44,12 +44,4 @@ app.use(swStats.getMiddleware({swaggerSpec:swaggerSpec, uriPath:"/metrics", name
 app.use('/api', indexRouter)
 app.use('/api-documentation', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
 
-const PORT = process.env.PORT || 3443
-    app.listen(
-        PORT,
-        console.log(
-            `Server running in ${process.env.NODE_ENV} node on port ${PORT}`.yellow.bold
-        )
-    )
-
 module.exports = app;    

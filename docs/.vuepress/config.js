@@ -15,7 +15,7 @@ module.exports = {
     }]
   ],
   port: 3030,
-  base: '/ms-registry/',
+  base: '/api-manti/',
   theme: 'cool',
   // dest: 'dist',
   head: [

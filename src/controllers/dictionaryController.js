@@ -7,7 +7,7 @@ const aggregateBy = ['em', 'person', 'datatime', 'source']
 
 /**
  * @param {Object} req Запит до серверу
- * @param {String} req.query Запит
+ * @param {String} req.query Запит до БД
  * @param {String} req.params ["type"] Поле по яку потрібно агрегувати інформацію
  * @param {String} req.params ["item"] Персона, по якій проводити пошук
  * @param {String} req.query.limit Максимальна кількість результатів у відповіді

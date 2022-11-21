@@ -8,7 +8,7 @@ const aggregateBy = ['content', 'subject', 'source', 'geo', 'person', 'event', '
 
 /**
  * @param {Object} req Запит до серверу
- * @param {String} req.content.queries Запит
+ * @param {String} req.content.queries Запит до БД
  * @param {String} req.content.return Поля які необхідно видати
  * @param {String} req.content.limit Максимальна кількість результатів у відповіді
  * @param {String} req.content.startIndex Індекс з якого починати пошук

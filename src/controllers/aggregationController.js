@@ -7,7 +7,7 @@ const aggregateBy = ['subject', 'source', 'geo', 'person', 'event', 'org', 'firm
 
 /**
  * @param {Object} req Запит до серверу
- * @param {String} req.content.queries Запит
+ * @param {String} req.content.queries Запит до БД
  * @param {String} req.content.aggregateBy Поле по якому проводити агрегацію
  * @param {String} req.content.order Сортування результатів (за замовченням asc)
  * @param {String} req.content.limit Максимальна кількість результатів у відповіді

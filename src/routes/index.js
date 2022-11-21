@@ -44,7 +44,7 @@ const dict = require('../controllers/dictionaryController')
  *        500:
  *          description: error in server
  */
-router.post('/timeline', timeline)
+router.post('/timeline', timeline.timeline)
 
 /**
  * @swagger
@@ -91,7 +91,7 @@ router.post('/timeline', timeline)
  *        500:
  *          description: error in server
  */
-router.post('/aggregation', aggregation)
+router.post('/aggregation', aggregation.aggregate)
 
 /**
  * @swagger
@@ -140,7 +140,7 @@ router.post('/aggregation', aggregation)
  *        500:
  *          description: error in server
  */
- router.post('/content', content)
+ router.post('/content', content.content)
 
  /**
  * @swagger
@@ -156,8 +156,8 @@ router.post('/aggregation', aggregation)
  *          description: error in server
  * 
  */
- router.get('/dict/:type', dict)
- router.get('/dict/:type/:item', dict)
+ router.get('/dict/:type', dict.dictionary)
+ router.get('/dict/:type/:item', dict.dictionary)
 
 module.exports = router
 

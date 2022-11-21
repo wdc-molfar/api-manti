@@ -14,7 +14,7 @@ const Manticoresearch = require('manticoresearch')
  * @param {Object} options Додаткові налаштування пошуку
  * @return {Promise}
  */
-exports.search = async (field, index, query, dop_info, columns = '*',  isLimit = false, offset = 0, limit = 10, options = []) => {
+const search = async (field, index, query, dop_info, columns = '*',  isLimit = false, offset = 0, limit = 10, options = []) => {
     const client = new Manticoresearch.ApiClient()
     client.basePath = process.env.MANTICORE_URL
     client.timeout  = process.env.TIMEOUT
@@ -25,10 +25,10 @@ exports.search = async (field, index, query, dop_info, columns = '*',  isLimit =
     }
     queryString += `query=SELECT ${columns} FROM ${index} WHERE`
     if(query.length > 0){
-        queryString += ` match('${query}') and`
+        queryString += ` match('${query}')`
     }
     if(dop_info){
-        queryString += dop_info
+        queryString += ' and ' + dop_info
     }
     if(isLimit){
         queryString += ` LIMIT ${offset},${limit}`
@@ -40,6 +40,7 @@ exports.search = async (field, index, query, dop_info, columns = '*',  isLimit =
         })
     }
     const res = await searchApi.sql(queryString)
+  
     const { ...content } = res
     return {content, field}
 }
@@ -48,7 +49,7 @@ exports.search = async (field, index, query, dop_info, columns = '*',  isLimit =
  * @param {String} id  Ідентифікатор для пошуку індексу документа
  * @return {Promise}
  */
-exports.findIndex = (id) => {
+const findIndex = (id) => {
     if(!id || !Number.isInteger(id) || id < 0)
     {
         return new Promise((resolve, reject) => {resolve({start: -1, end: -1})})
@@ -73,7 +74,7 @@ exports.findIndex = (id) => {
  * @param {String} end  Ідентифікатор кінця збереженого документу
  * @return {Promise}
  */
-exports.getData = (start, end) => {
+const getData = (start, end) => {
     if(!start || !Number.isInteger(start) || start < 0)
     {
         return new Promise((resolve, reject) => {return resolve("")})
@@ -92,4 +93,10 @@ exports.getData = (start, end) => {
             resolve(data)
         })
     });
+}
+
+module.exports = {
+    search,
+    findIndex,
+    getData
 }

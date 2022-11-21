@@ -18,7 +18,7 @@ const aggregateBy = ['content', 'subject', 'source', 'geo', 'person', 'event', '
  * @return {Promise}
  */
 
-module.exports = async (req, res) =>{
+const content = async (req, res) =>{
     try{
         const {...content} = req.body
             if(!content.queries){
@@ -244,4 +244,8 @@ module.exports = async (req, res) =>{
         }catch(error){
             sendAnswer(req, res, "error", [{message: error.message}])
         }
+}
+
+module.exports = {
+    content
 }

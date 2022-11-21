@@ -17,7 +17,7 @@ const aggregateBy = ['em', 'person', 'datatime', 'source']
  * @return {Promise}
  */
 
-module.exports = async (req, res) =>{
+const dictionary = async (req, res) =>{
     try{
         let type = req.params["type"];
         let item = req.params["item"];
@@ -188,4 +188,8 @@ module.exports = async (req, res) =>{
     }catch(error){
         sendAnswer(req, res, "error", [{message: error.message}])
     }
+}
+
+module.exports = {
+    dictionary
 }

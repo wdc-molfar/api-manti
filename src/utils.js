@@ -5,7 +5,7 @@
  * @param {Object} res Відповідь від серверу
  * @return {Promise}
  */
- module.exports.sendAnswer = (req, res, status, data) => {
+ const sendAnswer = (req, res, status, data) => {
     return res.json({
         request:{
             url: req.protocol + '://' + req.hostname + ":"+ req.socket.localPort + req.originalUrl,
@@ -23,6 +23,11 @@
  * @param {String} m 
  * @return {Object} Regex
  */
- module.exports.stringToRegex = (s, m) => {
+const stringToRegex = (s, m) => {
     return (m = s.match(/^([\/~@;%#'])(.*?)\1([gimsuy]*)$/)) ? new RegExp(m[2], m[3].split('').filter((i, p, s) => s.indexOf(i) === p).join('')) : new RegExp(s);
+}
+
+module.exports = {
+    sendAnswer,
+    stringToRegex
 }

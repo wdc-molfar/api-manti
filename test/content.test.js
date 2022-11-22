@@ -159,7 +159,7 @@ let test_8 = `{
     "startIndex": 0,
     "limit": 50
   }`
-
+  jest.setTimeout(30000)
 describe('Тести для шляху "/api/content"', () => {
     
     describe('Отримати інформацію з ManticoreSearch', () => {

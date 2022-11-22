@@ -21,7 +21,7 @@
 | Param | Type | Description |
 | --- | --- | --- |
 | req | <code>Object</code> | Запит до серверу |
-| req.content.queries | <code>String</code> | Запит |
+| req.content.queries | <code>String</code> | Запит до БД |
 | req.content.aggregateBy | <code>String</code> | Поле по якому проводити агрегацію |
 | req.content.order | <code>String</code> | Сортування результатів (за замовченням asc) |
 | req.content.limit | <code>String</code> | Максимальна кількість результатів у відповіді |
@@ -37,7 +37,7 @@
 | Param | Type | Description |
 | --- | --- | --- |
 | req | <code>Object</code> | Запит до серверу |
-| req.content.queries | <code>String</code> | Запит |
+| req.content.queries | <code>String</code> | Запит до БД |
 | req.content.return | <code>String</code> | Поля які необхідно видати |
 | req.content.limit | <code>String</code> | Максимальна кількість результатів у відповіді |
 | req.content.startIndex | <code>String</code> | Індекс з якого починати пошук |
@@ -53,7 +53,7 @@
 | Param | Type | Description |
 | --- | --- | --- |
 | req | <code>Object</code> | Запит до серверу |
-| req.query | <code>String</code> | Запит |
+| req.query | <code>String</code> | Запит до БД |
 | req.params | <code>String</code> | ["type"] Поле по яку потрібно агрегувати інформацію |
 | req.params | <code>String</code> | ["item"] Персона, по якій проводити пошук |
 | req.query.limit | <code>String</code> | Максимальна кількість результатів у відповіді |
@@ -69,7 +69,7 @@
 | Param | Type | Description |
 | --- | --- | --- |
 | req | <code>Object</code> | Запит до серверу |
-| req.content.queries | <code>String</code> | Запит |
+| req.content.queries | <code>String</code> | Запит до БД |
 | content.points | <code>String</code> | Кількість точок для графіка, що потрібно вивести |
 | req.content.startAt | <code>String</code> | Дата з якої починати пошук |
 | req.content.stopAt | <code>String</code> | Дата до якої шукати результати |

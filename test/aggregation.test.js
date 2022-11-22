@@ -150,6 +150,7 @@ let test_1 = `{
     "order": "asc",
     "limit": 50
   }`
+  jest.setTimeout(30000)
 describe('Тести для шляху "/api/aggregation"', () => {
     
     describe('Отримати агрегацію даних з ManticoreSearch', () => {

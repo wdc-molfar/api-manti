@@ -6,7 +6,7 @@ const path = require('path')
 
 jestOpenAPI(path.join(__dirname, '../oas.yaml'))
 let app = require( '../app.js' )
-
+jest.setTimeout(30000)
 describe('Тести для шляху "/api/dict/person"', () => {
     
     describe('Отримати інформацію з ManticoreSearch', () => {
